@@ -31,7 +31,7 @@ def question_generator_node(state: DocumentState) -> DocumentState:
     llm = ChatOpenAI(
         model="gpt-4o", 
         temperature=0.7,
-        api_key=OPENAI_API_KEY  # Explicitly pass the API key
+        api_key=OPENAI_API_KEY
     )
     
     current_index = state['current_index']
@@ -92,7 +92,7 @@ def validation_node(state: DocumentState) -> DocumentState:
     llm = ChatOpenAI(
         model="gpt-4o", 
         temperature=0.3,
-        api_key=OPENAI_API_KEY  # Explicitly pass the API key
+        api_key=OPENAI_API_KEY 
     )
     
     system_prompt = """You are a data validation expert for legal documents.
