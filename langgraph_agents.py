@@ -4,6 +4,15 @@ from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 import operator
 import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Verify API key is loaded
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY not found in environment variables!")
 
 class DocumentState(TypedDict):
     document_text: str
@@ -19,7 +28,11 @@ class DocumentState(TypedDict):
 def question_generator_node(state: DocumentState) -> DocumentState:
     """Generate contextual questions for placeholders"""
     
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.7)
+    llm = ChatOpenAI(
+        model="gpt-4o", 
+        temperature=0.7,
+        api_key=OPENAI_API_KEY  # Explicitly pass the API key
+    )
     
     current_index = state['current_index']
     placeholders = state['placeholders']
@@ -76,7 +89,11 @@ def question_generator_node(state: DocumentState) -> DocumentState:
 def validation_node(state: DocumentState) -> DocumentState:
     """Validate user response and format appropriately"""
     
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.3)
+    llm = ChatOpenAI(
+        model="gpt-4o", 
+        temperature=0.3,
+        api_key=OPENAI_API_KEY  # Explicitly pass the API key
+    )
     
     system_prompt = """You are a data validation expert for legal documents.
     Validate user responses and format them appropriately.
