@@ -5,3 +5,8 @@ venv/
 uploads/
 output/
 *.docx
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
