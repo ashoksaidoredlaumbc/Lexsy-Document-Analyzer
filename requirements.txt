@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+python-docx
+python-multipart
+aiofiles
+openai
+python-dotenv
+pydantic
+mammoth
+langgraph
+langchain
+langchain-openai
+langchain-core

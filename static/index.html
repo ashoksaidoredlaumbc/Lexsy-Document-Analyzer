@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexsy - Legal Document Automation</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Lexsy Document Assistant</h1>
+            <p>Upload your legal document template</p>
+        </header>
+
+        <div id="upload-section" class="section">
+            <div class="upload-box">
+                <input type="file" id="fileInput" accept=".docx" hidden>
+                <button onclick="document.getElementById('fileInput').click()" class="btn-primary">
+                    Upload .docx Template
+                </button>
+                <p class="hint">Select a Word document with placeholders like {company_name} or [CLIENT_NAME]</p>
+            </div>
+        </div>
+
+        <!-- Chat Section - Hidden by default -->
+        <div id="chat-section" class="section hidden">
+            <div class="progress-bar">
+                <div id="progress" class="progress-fill"></div>
+                <span id="progress-text">0/0</span>
+            </div>
+            
+            <div id="chat-container" class="chat-container"></div>
+            
+            <div class="input-area">
+                <input type="text" id="userInput" placeholder="Type your answer here..." disabled>
+                <button id="sendBtn" onclick="sendMessage()" disabled>Send</button>
+            </div>
+        </div>
+
+        <!-- Preview Section - Hidden by default -->
+        <div id="preview-section" class="section hidden">
+            <h2>Document Preview</h2>
+            <p class="hint">Review your document below. Click "Edit Values" to make changes or "Download" to save.</p>
+            
+            <div class="preview-actions">
+                <button onclick="showEditModal()" class="btn-secondary">✏️ Edit Values</button>
+                <button id="downloadBtn" class="btn-primary">⬇️ Download Document</button>
+                <button onclick="location.reload()" class="btn-secondary">🔄 Start New Document</button>
+            </div>
+            
+            <div id="document-preview" class="doc-preview-container"></div>
+        </div>
+    </div>
+
+    <!-- Edit Modal - Hidden by default -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Document Values</h3>
+                <button onclick="closeEditModal()" class="close-btn">×</button>
+            </div>
+            <div id="editForm" class="modal-body"></div>
+            <div class="modal-footer">
+                <button onclick="closeEditModal()" class="btn-secondary">Cancel</button>
+                <button onclick="saveEdits()" class="btn-primary">Save & Update Preview</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
+
